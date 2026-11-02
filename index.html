@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kishore S S, Data Engineer</title>
+<meta name="description" content="Kishore S S is a data engineer at Accenture building AWS data pipelines and automated reporting with Glue, Athena, Step Functions, Lambda, S3, PySpark and SQL.">
+<meta property="og:title" content="Kishore S S, Data Engineer">
+<meta property="og:description" content="AWS data pipelines and automated reporting with PySpark and SQL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --mist: #EEF1F5;
+    --surface: #F9FAFC;
+    --ink: #17223A;
+    --graphite: #4D5A72;
+    --rule: #C8D0DC;
+    --grid: #D6DCE5;
+    --amber: #E09A2D;
+    --amber-ink: #8A570A;
+    --pine: #1E7457;
+    --pine-wash: #E1EFE9;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --mist: #121D33;
+      --surface: #18263F;
+      --ink: #E6EBF3;
+      --graphite: #A2AFC6;
+      --rule: #34466B;
+      --grid: #223352;
+      --amber: #F2B14C;
+      --amber-ink: #F4BD66;
+      --pine: #58C59D;
+      --pine-wash: #173837;
+      color-scheme: dark;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body {
+    margin: 0;
+    background: var(--mist);
+    color: var(--ink);
+    font-family: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    font-stretch: 100%;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  p, h1, h2, h3, ul, ol, dl, dd { margin: 0; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; border-radius: 4px; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .skip { position: absolute; left: 16px; top: -60px; padding: 10px 14px; background: var(--ink); color: var(--mist); border-radius: 8px; z-index: 20; }
+  .skip:focus { top: 12px; }
+
+  .wrap { max-width: 1180px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 40px); }
+
+  /* Navigation */
+  .nav {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--mist);
+    background: color-mix(in srgb, var(--mist) 90%, transparent);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border-bottom: 1px solid color-mix(in srgb, var(--rule) 60%, transparent);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 20px; }
+  .brand { font-weight: 800; font-stretch: 125%; letter-spacing: -0.01em; text-decoration: none; font-size: 1.0625rem; }
+  .nav-links { display: flex; gap: 28px; list-style: none; padding: 0; }
+  .nav-links a { text-decoration: none; color: var(--graphite); font-size: 0.9375rem; }
+  .nav-links a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+
+  /* Hero */
+  .hero { padding-block: clamp(48px, 8vw, 104px) clamp(56px, 7vw, 96px); }
+  .name {
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 800;
+    font-stretch: 125%;
+    letter-spacing: -0.035em;
+    line-height: 0.9;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: end;
+    margin-top: clamp(24px, 3vw, 40px);
+  }
+  .lede { font-size: clamp(1.25rem, 2.2vw, 1.625rem); line-height: 1.4; max-width: 34ch; }
+  .hero-side { display: grid; gap: 18px; justify-items: start; }
+  .where { color: var(--graphite); font-size: 0.9375rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 18px;
+    border-radius: 10px;
+    border: 1.5px solid var(--ink);
+    font: inherit; font-weight: 600; font-size: 0.9375rem; line-height: 1.2;
+    text-decoration: none; color: var(--ink); background: transparent;
+    cursor: pointer;
+  }
+  .btn:hover { background: var(--surface); }
+  .btn-solid { background: var(--ink); color: var(--mist); }
+  .btn-solid:hover { background: var(--graphite); border-color: var(--graphite); }
+  .btn[disabled] { opacity: 0.45; cursor: default; }
+  .btn[disabled]:hover { background: transparent; }
+
+  /* Pipeline */
+  .pipeline {
+    margin-top: clamp(48px, 6vw, 72px);
+    background-color: var(--surface);
+    background-image: radial-gradient(circle, var(--grid) 1px, transparent 1.6px);
+    background-size: 20px 20px;
+    border: 1px solid var(--rule);
+    border-radius: 20px;
+    padding: clamp(20px, 3vw, 32px);
+  }
+  .pl-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 16px 32px; }
+  .pl-intro { flex: 1 1 380px; min-width: 0; }
+  .pl-controls { flex: none; }
+  .pl-title { font-size: 1.375rem; font-weight: 750; font-stretch: 112%; letter-spacing: -0.01em; line-height: 1.2; }
+  .pl-caption { margin-top: 6px; color: var(--graphite); max-width: 62ch; }
+  .pl-controls { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .status { font-size: 0.9375rem; color: var(--graphite); font-variant-numeric: tabular-nums; min-width: 15ch; }
+  .status[data-tone="done"] { color: var(--pine); font-weight: 600; }
+
+  .machine {
+    margin-top: 28px;
+    border: 1.5px dashed var(--rule);
+    border-radius: 16px;
+    padding: 20px;
+    background: color-mix(in srgb, var(--surface) 70%, transparent);
+  }
+  .stages { list-style: none; padding: 0; display: flex; gap: 24px; }
+  .stage { position: relative; flex: 1 1 0; min-width: 0; display: flex; }
+
+  .node {
+    display: flex; flex-direction: column; gap: 4px;
+    width: 100%; min-height: 138px;
+    padding: 14px 14px 16px;
+    font: inherit; color: inherit; text-align: left;
+    background: var(--surface);
+    border: 1.5px solid var(--rule);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: border-color 0.25s ease, background-color 0.25s ease;
+  }
+  .node:hover { border-color: var(--graphite); }
+  .node[data-state="running"] { border-color: var(--amber); }
+  .node[data-state="done"] { border-color: var(--pine); background: var(--pine-wash); }
+  .node[aria-pressed="true"] { box-shadow: inset 0 -4px 0 var(--ink); }
+  .node-top { display: flex; align-items: center; }
+  .dot {
+    position: relative;
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2px solid var(--rule);
+    display: inline-grid; place-items: center;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+  .dot svg { width: 9px; height: 9px; opacity: 0; }
+  .node[data-state="running"] .dot { border-color: var(--amber); background: var(--amber); }
+  .node[data-state="running"] .dot::after {
+    content: ""; position: absolute; inset: -6px; border-radius: 50%;
+    border: 2px solid var(--amber);
+    animation: pulse 0.9s ease-out infinite;
+  }
+  .node[data-state="done"] .dot { border-color: var(--pine); background: var(--pine); }
+  .node[data-state="done"] .dot svg { opacity: 1; }
+  @keyframes pulse { from { transform: scale(0.6); opacity: 1; } to { transform: scale(1.35); opacity: 0; } }
+
+  .verb { margin-top: 12px; font-size: 1.1875rem; font-weight: 750; font-stretch: 112%; letter-spacing: -0.01em; line-height: 1.15; }
+  .svc { font-size: 0.875rem; color: var(--graphite); line-height: 1.35; }
+  .fact { margin-top: auto; padding-top: 10px; font-size: 0.8125rem; font-weight: 650; color: var(--amber-ink); line-height: 1.3; }
+
+  .conn {
+    position: absolute; top: 50%; left: 100%;
+    width: 24px; height: 2px;
+    background: var(--rule);
+    transition: background-color 0.2s;
+  }
+  .conn.done { background: var(--pine); }
+  .packet {
+    position: absolute; left: 0; top: 50%;
+    width: 10px; height: 10px; margin: -5px 0 0 -5px;
+    border-radius: 50%; background: var(--amber);
+    opacity: 0;
+  }
+  .conn.flowing .packet { animation: flow-x 320ms linear forwards; }
+  @keyframes flow-x { from { opacity: 1; transform: translateX(0); } to { opacity: 1; transform: translateX(24px); } }
+  @keyframes flow-y { from { opacity: 1; transform: translateY(0); } to { opacity: 1; transform: translateY(18px); } }
+
+  .machine-foot {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(140px, 32%);
+    gap: 16px 28px; align-items: center;
+    margin-top: 20px; padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    font-size: 0.9375rem; color: var(--graphite);
+  }
+  .machine-foot strong, .deploy strong { color: var(--ink); font-weight: 650; }
+  .track { height: 6px; border-radius: 3px; background: var(--grid); overflow: hidden; }
+  .track-fill { display: block; height: 100%; background: var(--pine); transform: scaleX(0); transform-origin: left center; }
+  .deploy { margin-top: 14px; padding-inline: 4px; font-size: 0.9375rem; color: var(--graphite); }
+
+  .detail {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr);
+    gap: 12px 32px;
+    margin-top: 24px; padding-top: 24px;
+    border-top: 1px solid var(--rule);
+  }
+  .detail-verb { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 800; font-stretch: 125%; letter-spacing: -0.02em; line-height: 1; }
+  .detail-svc { margin-top: 8px; color: var(--graphite); }
+  .detail-text { max-width: 60ch; font-size: 1.0625rem; }
+  .detail-fact { margin-top: 10px; font-weight: 650; color: var(--amber-ink); }
+
+  /* Sections */
+  .section { padding-block: clamp(64px, 9vw, 112px); border-top: 1px solid var(--rule); }
+  .section-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.25fr); gap: 32px 56px; }
+  .section-title { font-size: clamp(2rem, 3.6vw, 2.75rem); font-weight: 780; font-stretch: 118%; letter-spacing: -0.025em; line-height: 1; }
+  .section-intro { margin-top: 16px; color: var(--graphite); max-width: 32ch; }
+
+  /* Experience timeline */
+  .timeline { list-style: none; padding: 0; position: relative; }
+  .job { position: relative; display: grid; grid-template-columns: 10.5rem minmax(0, 1fr); gap: 8px 32px; padding-bottom: 48px; }
+  .job:last-child { padding-bottom: 0; }
+  .job::before {
+    content: ""; position: absolute; left: calc(10.5rem + 15px); top: 10px; bottom: -10px;
+    width: 1.5px; background: var(--rule);
+  }
+  .job:last-child::before { display: none; }
+  .job::after {
+    content: ""; position: absolute; left: calc(10.5rem + 10px); top: 7px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--mist); border: 2px solid var(--ink);
+  }
+  .job:first-child::after { background: var(--ink); }
+  .when { color: var(--graphite); font-size: 0.9375rem; font-variant-numeric: tabular-nums; padding-top: 2px; }
+  .job-body { padding-left: 24px; }
+  .job-title { font-size: 1.5rem; font-weight: 750; font-stretch: 110%; letter-spacing: -0.015em; line-height: 1.2; }
+  .org { margin-top: 4px; color: var(--graphite); }
+  .points { margin-top: 16px; padding-left: 1.1em; display: grid; gap: 10px; max-width: 68ch; }
+  .points li::marker { color: var(--graphite); }
+
+  /* Research */
+  .paper-title { font-size: clamp(1.5rem, 2.6vw, 2.125rem); font-weight: 760; font-stretch: 110%; letter-spacing: -0.02em; line-height: 1.15; max-width: 26ch; }
+  .paper-body { margin-top: 18px; max-width: 62ch; }
+  .paper-cite { margin-top: 14px; color: var(--graphite); }
+  .paper-cite cite { font-style: italic; color: var(--ink); }
+  .paper-link { margin-top: 24px; }
+  .project { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--rule); }
+  .project-title { font-size: 1.375rem; font-weight: 720; font-stretch: 108%; letter-spacing: -0.01em; line-height: 1.2; }
+  .project p:last-child { margin-top: 12px; max-width: 62ch; }
+
+  /* Skills */
+  .skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 40px; }
+  .skill { padding-block: 16px 18px; border-top: 1px solid var(--rule); }
+  .skill dt { font-size: 0.9375rem; color: var(--graphite); }
+  .skill dd { margin-top: 4px; font-size: 1.125rem; font-weight: 550; line-height: 1.4; }
+
+  /* Education */
+  .edu { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 40px; }
+  .edu-item h3 { font-size: 1.1875rem; font-weight: 700; font-stretch: 106%; line-height: 1.3; }
+  .edu-item p { margin-top: 4px; color: var(--graphite); }
+
+  /* Contact */
+  .contact { background: var(--ink); color: var(--mist); padding-block: clamp(72px, 10vw, 128px) 40px; }
+  .contact .section-title { color: var(--mist); }
+  .contact-intro { margin-top: 16px; max-width: 40ch; opacity: 0.85; }
+  .email {
+    display: inline-block; margin-top: clamp(24px, 4vw, 40px);
+    font-size: clamp(1.5rem, 6vw, 4.5rem); font-weight: 800; font-stretch: 118%;
+    letter-spacing: -0.03em; line-height: 1.05;
+    text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.14em;
+    overflow-wrap: anywhere;
+  }
+  .email:hover { text-decoration-thickness: 4px; }
+  .contact :focus-visible { outline-color: var(--mist); }
+  .contact-list { list-style: none; padding: 0; margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px 40px; }
+  .contact-list a { text-underline-offset: 4px; }
+  .foot { margin-top: clamp(64px, 8vw, 96px); padding-top: 20px; border-top: 1px solid color-mix(in srgb, var(--mist) 25%, transparent); font-size: 0.875rem; opacity: 0.7; }
+
+  /* Pipeline goes vertical below this width */
+  @media (max-width: 1120px) {
+    .stages { flex-direction: column; gap: 18px; }
+    .node {
+      min-height: 0;
+      display: grid; grid-template-columns: 16px 9.5rem minmax(0, 1fr) auto;
+      align-items: baseline; column-gap: 16px;
+      padding: 14px 16px;
+    }
+    .node-top { align-self: center; }
+    .verb { margin-top: 0; }
+    .fact { margin-top: 0; padding-top: 0; text-align: right; }
+    .conn { top: 100%; left: 23px; width: 2px; height: 18px; }
+    .packet { left: 50%; top: 0; margin: -5px 0 0 -5px; }
+    .conn.flowing .packet { animation-name: flow-y; }
+  }
+  @media (max-width: 860px) {
+    .hero-grid, .section-grid, .detail { grid-template-columns: 1fr; }
+    .hero-grid { gap: 28px; }
+    .section-intro { max-width: 52ch; }
+    .machine-foot { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    body { font-size: 1rem; }
+    .nav-links li:not(:last-child) { display: none; }
+    .machine { padding: 14px; }
+    .node { grid-template-columns: 16px minmax(0, 1fr); row-gap: 2px; }
+    .node-top { grid-row: 1; }
+    .svc, .fact { grid-column: 2; }
+    .fact { text-align: left; padding-top: 4px; }
+    .conn { left: 23px; }
+    .job { grid-template-columns: 1fr; }
+    .job::before, .job::after { display: none; }
+    .job-body { padding-left: 0; }
+    .skills, .edu { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <nav class="wrap nav-inner" aria-label="Main">
+    <a class="brand" href="#top">Kishore S S</a>
+    <ul class="nav-links">
+      <li><a href="#work">Experience</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="hero" id="top">
+    <div class="wrap">
+      <h1 class="name">Kishore S S</h1>
+      <div class="hero-grid">
+        <p class="lede">Data engineer at Accenture. I build AWS pipelines that take raw records from MySQL and PostgreSQL and turn them into the reports business teams use every day.</p>
+        <div class="hero-side">
+          <p class="where">Based in Tamil Nadu, working hybrid from Chennai.</p>
+          <div class="actions">
+            <a class="btn btn-solid" href="mailto:kishorspkj@gmail.com">Email me</a>
+            <a class="btn" href="Kishore_S_S_Resume.pdf" download>Download resume</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pipeline" aria-labelledby="pl-title">
+        <div class="pl-head">
+          <div class="pl-intro">
+            <h2 class="pl-title" id="pl-title">How my reporting pipelines run</h2>
+            <p class="pl-caption">I've designed and built nearly 20 automated reports and pipelines like this one for NetlinkTrust. Select any step to see what it does.</p>
+          </div>
+          <div class="pl-controls">
+            <p class="status" id="status" aria-live="polite">Ready to run</p>
+            <button class="btn" id="run" type="button">Run pipeline</button>
+          </div>
+        </div>
+
+        <div class="machine">
+          <ol class="stages" aria-label="Pipeline steps">
+            <li class="stage">
+              <button class="node" type="button" data-i="0" data-state="pending" aria-pressed="false" aria-controls="detail">
+                <span class="node-top"><span class="dot" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5.2 4 7.6 8.6 2.6" stroke="var(--surface)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr state-text">Pending.</span></span>
+                <span class="verb">Extract</span>
+                <span class="svc">MySQL and PostgreSQL</span>
+                <span class="fact">Millions of records a day</span>
+              </button>
+              <span class="conn" aria-hidden="true"><span class="packet"></span></span>
+            </li>
+            <li class="stage">
+              <button class="node" type="button" data-i="1" data-state="pending" aria-pressed="false" aria-controls="detail">
+                <span class="node-top"><span class="dot" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5.2 4 7.6 8.6 2.6" stroke="var(--surface)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr state-text">Pending.</span></span>
+                <span class="verb">Catalog</span>
+                <span class="svc">AWS Glue Crawlers</span>
+              </button>
+              <span class="conn" aria-hidden="true"><span class="packet"></span></span>
+            </li>
+            <li class="stage">
+              <button class="node" type="button" data-i="2" data-state="pending" aria-pressed="false" aria-controls="detail">
+                <span class="node-top"><span class="dot" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5.2 4 7.6 8.6 2.6" stroke="var(--surface)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr state-text">Pending.</span></span>
+                <span class="verb">Transform</span>
+                <span class="svc">Glue ETL with PySpark and SQL</span>
+                <span class="fact">About 30% faster after tuning</span>
+              </button>
+              <span class="conn" aria-hidden="true"><span class="packet"></span></span>
+            </li>
+            <li class="stage">
+              <button class="node" type="button" data-i="3" data-state="pending" aria-pressed="false" aria-controls="detail">
+                <span class="node-top"><span class="dot" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5.2 4 7.6 8.6 2.6" stroke="var(--surface)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr state-text">Pending.</span></span>
+                <span class="verb">Store</span>
+                <span class="svc">Amazon S3</span>
+              </button>
+              <span class="conn" aria-hidden="true"><span class="packet"></span></span>
+            </li>
+            <li class="stage">
+              <button class="node" type="button" data-i="4" data-state="pending" aria-pressed="false" aria-controls="detail">
+                <span class="node-top"><span class="dot" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5.2 4 7.6 8.6 2.6" stroke="var(--surface)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr state-text">Pending.</span></span>
+                <span class="verb">Query</span>
+                <span class="svc">Amazon Athena</span>
+              </button>
+              <span class="conn" aria-hidden="true"><span class="packet"></span></span>
+            </li>
+            <li class="stage">
+              <button class="node" type="button" data-i="5" data-state="pending" aria-pressed="false" aria-controls="detail">
+                <span class="node-top"><span class="dot" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none"><path d="M1.5 5.2 4 7.6 8.6 2.6" stroke="var(--surface)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sr state-text">Pending.</span></span>
+                <span class="verb">Deliver</span>
+                <span class="svc">Qlik Sense and Qlik NPrinting</span>
+                <span class="fact">Used by 4+ business teams</span>
+              </button>
+            </li>
+          </ol>
+
+          <div class="machine-foot">
+            <p><strong>AWS Step Functions and Lambda</strong> run every step in order, so no job needs a manual start.</p>
+            <div class="track" aria-hidden="true"><span class="track-fill" id="track"></span></div>
+          </div>
+        </div>
+        <p class="deploy"><strong>Jenkins and Git</strong> deploy the job code the same way on every release.</p>
+
+        <div class="detail" id="detail" aria-live="polite">
+          <div>
+            <p class="detail-verb" id="d-verb">Transform</p>
+            <p class="detail-svc" id="d-svc">Glue ETL with PySpark and SQL</p>
+          </div>
+          <div>
+            <p class="detail-text" id="d-text">PySpark and SQL jobs clean, join and reshape the data. Optimizing these transformations cut pipeline runtime by about 30%.</p>
+            <p class="detail-fact" id="d-fact">About 30% faster after tuning</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="work" aria-labelledby="work-title">
+    <div class="wrap section-grid">
+      <header>
+        <h2 class="section-title" id="work-title">Experience</h2>
+        <p class="section-intro">I started at Accenture building Java APIs for Singtel, then moved into data engineering for NetlinkTrust.</p>
+      </header>
+      <ol class="timeline">
+        <li class="job">
+          <p class="when">Apr 2025 – present</p>
+          <div class="job-body">
+            <h3 class="job-title">Data Engineer</h3>
+            <p class="org">Accenture, client NetlinkTrust (NLT). Chennai, hybrid.</p>
+            <ul class="points">
+              <li>Designed and built nearly 20 automated reports and data pipelines from scratch on AWS, using Glue ETL jobs and Crawlers, Athena, Step Functions, Lambda and S3 to ingest, catalog, transform and query large datasets.</li>
+              <li>Orchestrated end-to-end workflows with Step Functions and Lambda, and automated job execution and deployment through Jenkins CI/CD for reliable, repeatable delivery.</li>
+              <li>Optimized SQL and PySpark transformations over MySQL and PostgreSQL sources, improving pipeline runtime by about 30% while processing millions of records daily. Managed job code and backups with Git.</li>
+              <li>Built interactive dashboards and automated reports in Qlik Sense and Qlik NPrinting for 4+ business teams and stakeholders.</li>
+              <li>Supported clients across every business stream, delivering their full set of required reports and resolving reporting and data queries.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="job">
+          <p class="when">Aug 2024 – Mar 2025</p>
+          <div class="job-body">
+            <h3 class="job-title">Java API Developer</h3>
+            <p class="org">Accenture, client Singtel DFF.</p>
+            <ul class="points">
+              <li>Built and enhanced backend functionality in Java and Spring Boot, contributing to RESTful API design and development.</li>
+              <li>Implemented database connectivity and SQL operations against MySQL and PostgreSQL to support API data flows and integrations.</li>
+              <li>Worked with the team on integration, debugging and delivery of API features, and guided the client through adoption and technical queries.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="job">
+          <p class="when">Dec 2022 – Apr 2023</p>
+          <div class="job-body">
+            <h3 class="job-title">Final-Year Project Intern</h3>
+            <p class="org">Nitroware Technologies, Research and Development. Coimbatore.</p>
+            <ul class="points">
+              <li>Developed a deep-learning intrusion detection system with RNN and LSTM that detects and halts network cyberattacks at 99.5% accuracy.</li>
+              <li>Handled data preprocessing, model training and evaluation. The work was published in a peer-reviewed journal.</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="research" aria-labelledby="research-title">
+    <div class="wrap section-grid">
+      <header>
+        <h2 class="section-title" id="research-title">Research and projects</h2>
+      </header>
+      <div>
+        <article>
+          <h3 class="paper-title">Deep-learning intrusion detection that catches network attacks with 99.5% accuracy</h3>
+          <p class="paper-body">A recurrent neural network with LSTM that detects and halts network cyberattacks, outperforming conventional detection methods. I handled the data preprocessing, model training and evaluation.</p>
+          <p class="paper-cite">Co-author. Published in <cite>Computers, Materials &amp; Continua</cite>, vol. 78, no. 3.</p>
+          <a class="btn paper-link" href="https://doi.org/10.32604/cmc.2023.043172" target="_blank" rel="noopener">Read the paper</a>
+        </article>
+        <article class="project">
+          <h3 class="project-title">Grievance Redressal web application</h3>
+          <p class="org">MCA project, Jul – Nov 2022. Built with Java, JSP and MySQL.</p>
+          <p>An online portal where students record complaints and staff track, route and resolve them, streamlining how student requests and feedback are handled.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="skills" aria-labelledby="skills-title">
+    <div class="wrap section-grid">
+      <header>
+        <h2 class="section-title" id="skills-title">Skills</h2>
+      </header>
+      <dl class="skills">
+        <div class="skill"><dt>AWS</dt><dd>Glue (ETL and Crawlers), Athena, Step Functions, Lambda, S3</dd></div>
+        <div class="skill"><dt>Data engineering</dt><dd>PySpark, ETL, data pipelines, data warehousing</dd></div>
+        <div class="skill"><dt>Languages</dt><dd>Python, SQL, Java</dd></div>
+        <div class="skill"><dt>Databases</dt><dd>MySQL, PostgreSQL</dd></div>
+        <div class="skill"><dt>CI/CD and version control</dt><dd>Jenkins, Git</dd></div>
+        <div class="skill"><dt>BI and reporting</dt><dd>Qlik Sense, Qlik NPrinting</dd></div>
+        <div class="skill"><dt>Backend and APIs</dt><dd>Spring Boot, RESTful APIs</dd></div>
+        <div class="skill"><dt>Machine learning</dt><dd>Deep learning, RNN, LSTM</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section" id="education" aria-labelledby="edu-title">
+    <div class="wrap section-grid">
+      <header>
+        <h2 class="section-title" id="edu-title">Education</h2>
+      </header>
+      <div class="edu">
+        <div class="edu-item">
+          <h3>Master of Computer Applications</h3>
+          <p>Karpagam College of Engineering, Coimbatore. 2021 – 2023.</p>
+        </div>
+        <div class="edu-item">
+          <h3>Bachelor of Computer Applications</h3>
+          <p>Paavendhar College of Arts and Science, Attur. 2018 – 2021.</p>
+        </div>
+        <div class="edu-item">
+          <h3>Programming in Java</h3>
+          <p>NPTEL certification, an IITs and IISc initiative. Jul – Oct 2023.</p>
+        </div>
+        <div class="edu-item">
+          <h3>Languages</h3>
+          <p>Tamil (native) and English (fluent).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <h2 class="section-title" id="contact-title">Get in touch</h2>
+    <p class="contact-intro">Email is the quickest way to reach me. I'm happy to talk about data engineering roles and projects.</p>
+    <a class="email" href="mailto:kishorspkj@gmail.com">kishorspkj@gmail.com</a>
+    <ul class="contact-list">
+      <li><a href="tel:+917373412299">+91 73734 12299</a></li>
+      <li><a href="https://www.linkedin.com/in/kishore-s-s838a40231" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="Kishore_S_S_Resume.pdf" download>Download resume (PDF)</a></li>
+      <li>Kallakurichi, Tamil Nadu</li>
+    </ul>
+    <p class="foot">© 2026 Kishore S S</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var steps = [
+    { verb: "Extract", svc: "MySQL and PostgreSQL", fact: "Millions of records a day",
+      text: "Each run starts at the client's relational databases, pulling the raw records that every report depends on." },
+    { verb: "Catalog", svc: "AWS Glue Crawlers", fact: "",
+      text: "Crawlers scan the incoming data and register its tables in the Glue Data Catalog, so the later steps can find and query it." },
+    { verb: "Transform", svc: "Glue ETL with PySpark and SQL", fact: "About 30% faster after tuning",
+      text: "PySpark and SQL jobs clean, join and reshape the data. Optimizing these transformations cut pipeline runtime by about 30%." },
+    { verb: "Store", svc: "Amazon S3", fact: "",
+      text: "Transformed output lands in S3, kept ready to be queried as tables." },
+    { verb: "Query", svc: "Amazon Athena", fact: "",
+      text: "Athena runs SQL directly over the data in S3 to produce report-ready results." },
+    { verb: "Deliver", svc: "Qlik Sense and Qlik NPrinting", fact: "Used by 4+ business teams",
+      text: "Interactive dashboards and automated reports put the results in front of the business teams who need them." }
+  ];
+
+  var nodes = Array.prototype.slice.call(document.querySelectorAll(".node"));
+  var conns = Array.prototype.slice.call(document.querySelectorAll(".conn"));
+  var runBtn = document.getElementById("run");
+  var status = document.getElementById("status");
+  var track = document.getElementById("track");
+  var dVerb = document.getElementById("d-verb");
+  var dSvc = document.getElementById("d-svc");
+  var dText = document.getElementById("d-text");
+  var dFact = document.getElementById("d-fact");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var STEP = 520, FLOW = 320;
+  var running = false;
+  var stateLabel = { pending: "Pending.", running: "Running.", done: "Succeeded." };
+
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+  function select(i) {
+    nodes.forEach(function (n, j) { n.setAttribute("aria-pressed", j === i ? "true" : "false"); });
+    var s = steps[i];
+    dVerb.textContent = s.verb;
+    dSvc.textContent = s.svc;
+    dText.textContent = s.text;
+    dFact.textContent = s.fact;
+    dFact.hidden = !s.fact;
+  }
+
+  function setState(i, state) {
+    nodes[i].dataset.state = state;
+    nodes[i].querySelector(".state-text").textContent = stateLabel[state];
+  }
+
+  function setStatus(text, tone) {
+    status.textContent = text;
+    if (tone) status.dataset.tone = tone; else delete status.dataset.tone;
+  }
+
+  function reset() {
+    nodes.forEach(function (_, i) { setState(i, "pending"); });
+    conns.forEach(function (c) { c.classList.remove("flowing", "done"); });
+    track.style.transition = "none";
+    track.style.transform = "scaleX(0)";
+    void track.offsetWidth;
+  }
+
+  function finish() {
+    nodes.forEach(function (_, i) { setState(i, "done"); });
+    conns.forEach(function (c) { c.classList.remove("flowing"); c.classList.add("done"); });
+    track.style.transform = "scaleX(1)";
+    setStatus("Succeeded: 6 of 6 steps", "done");
+    runBtn.textContent = "Run again";
+    runBtn.disabled = false;
+    running = false;
+  }
+
+  async function run() {
+    if (running) return;
+    running = true;
+    runBtn.disabled = true;
+    reset();
+    if (reduce) { finish(); return; }
+
+    var total = steps.length * STEP + conns.length * FLOW;
+    track.style.transition = "transform " + total + "ms linear";
+    track.style.transform = "scaleX(1)";
+
+    for (var i = 0; i < steps.length; i++) {
+      setState(i, "running");
+      setStatus("Running step " + (i + 1) + " of 6: " + steps[i].verb);
+      await wait(STEP);
+      setState(i, "done");
+      if (i < conns.length) {
+        conns[i].classList.add("flowing");
+        await wait(FLOW);
+        conns[i].classList.remove("flowing");
+        conns[i].classList.add("done");
+      }
+    }
+    finish();
+  }
+
+  nodes.forEach(function (n, i) { n.addEventListener("click", function () { select(i); }); });
+  runBtn.addEventListener("click", run);
+
+  select(2);
+  if (reduce) { finish(); }
+  else { setTimeout(run, 700); }
+})();
+</script>
+</body>
+</html>
